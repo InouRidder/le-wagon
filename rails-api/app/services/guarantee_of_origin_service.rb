@@ -1,7 +1,7 @@
 class GuaranteeOfOriginService
   def initialize(household, data)
     @household = household
-    @day_peak_production = DayProductionEstimator.estimate(@household, household.peak_curve)
+    @day_radiation_with_times = DayRadation.times_for(day)
   end
 
   def consumed_green_energy
