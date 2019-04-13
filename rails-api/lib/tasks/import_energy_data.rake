@@ -9,7 +9,6 @@ task :import_energy_data => :environment do
   Dir[path].each do |file_path|
     uid = file_path.match(/6.*\./)[0]
     household = Household.find_or_create_by!(uid: uid)
-    p household
     options = { headers: :first_row, header_converters: :symbol }
     house_data_count = Hash.new(0)
     CSV.foreach(file_path, options) do |row|
