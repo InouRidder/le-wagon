@@ -11,7 +11,7 @@ class Household < ApplicationRecord
     Household.find_by(uid: attributes[:uid]) || Household.create(uid: attributes[:uid])
   end
 
-  def set_peak_curve
+  def set_optimal_production
     OptimalProductionEstimator.create_peak_curve(self)
   end
 
@@ -20,7 +20,8 @@ class Household < ApplicationRecord
   end
 
   def highest_energy_datum
-    EnergyDatum.find_by(returned_energy: energy_data.pluck(:returned_energy).max)
+    all_data = self.energy_data
+    all_data.find_by(returned_energy: all_data.pluck(:returned_energy).max)
   end
 
   private
