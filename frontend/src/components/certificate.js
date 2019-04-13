@@ -63,9 +63,11 @@ class Certificate extends Component {
 
     const certificates = this.state.certificates.map((certificate) => {
       return (
-        <li key={ Math.random().toString(36).replace(/[^a-z]+/g, '')  }>
-          <strong>amount:</strong> { Number(certificate.amount) } <strong>type:</strong> { CERTTYPES[certificate.certificateType] } <strong>timestamp:</strong> { Number(certificate.timestamp) }
-        </li>
+        <tr key={ Math.random().toString(36).replace(/[^a-z]+/g, '')  }>
+          <td>{ Number(certificate.amount) }</td>
+          <td>{ CERTTYPES[certificate.certificateType] }</td>
+          <td>{ Number(certificate.timestamp) }</td>
+        </tr>
       )
     })
 
@@ -92,9 +94,18 @@ class Certificate extends Component {
 
           <br />
 
-          <ul>
-            { certificates }
-          </ul>
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              { certificates }
+            </tbody>
+          </table>
         </div>
       </Router>
     );
