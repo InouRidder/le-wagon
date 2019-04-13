@@ -25,7 +25,7 @@ class Certificate extends Component {
     const web3 = await getWeb3
 
     const jsonInterface = certificatesArtifact.abi
-    const address = "0xe7736e96541aA5ee2acf011683e4B8e97086EB32"
+    const address = "0xBA21822d572a2572DdF75555442615bD41AA54FE"
     const options = {}
 
     const contractInstance = await web3.instance.eth.Contract(jsonInterface, address, options)
@@ -45,12 +45,14 @@ class Certificate extends Component {
     var certificateList = []
 
     var i
-    for (i = 0; i < certificates[0].length; i++) {
-      certificateList.push({
-        amount: certificates[0][i],
-        timestamp: certificates[1][i],
-        certificateType: certificates[2][i]
-      })
+    if (certificates) {
+      for (i = 0; i < certificates[0].length; i++) {
+        certificateList.push({
+          amount: certificates[0][i],
+          timestamp: certificates[1][i],
+          certificateType: certificates[2][i]
+        })
+      }
     }
 
     this.setState({certificates: certificateList})

@@ -3774,10 +3774,16 @@
       "links": {},
       "address": "0xe7736e96541aA5ee2acf011683e4B8e97086EB32",
       "transactionHash": "0x26f1cbdd017e904e24776aed9d8d712a3c74dee697f102371c9cb1111d375bcd"
+    },
+    "1555178482598": {
+      "events": {},
+      "links": {},
+      "address": "0xBA21822d572a2572DdF75555442615bD41AA54FE",
+      "transactionHash": "0x68221eceb7108fc702864ba5bd5202c19ac58701a6c0a465b6da3f20c7b3d729"
     }
   },
   "schemaVersion": "3.0.6",
-  "updatedAt": "2019-04-13T17:23:37.056Z",
+  "updatedAt": "2019-04-13T18:24:43.864Z",
   "devdoc": {
     "methods": {}
   },
