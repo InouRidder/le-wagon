@@ -10,14 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2018_12_12_082217) do
+ActiveRecord::Schema.define(version: 2019_04_12_192014) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "energy_data", force: :cascade do |t|
+    t.datetime "datetime"
+    t.integer "returned_energy"
+    t.string "type"
+    t.bigint "household_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["household_id"], name: "index_energy_data_on_household_id"
+  end
+
   create_table "examples", force: :cascade do |t|
     t.string "name"
     t.string "colour"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "households", force: :cascade do |t|
+    t.integer "uid"
+    t.jsonb "peak_production_curve"
+    t.integer "average_min_consumption"
+    t.boolean "solar"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
