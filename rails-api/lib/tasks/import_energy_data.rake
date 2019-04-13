@@ -3,6 +3,7 @@ require 'pry'
 
 task :import_energy_data => :environment do
   path = "#{Rails.root}/db/data/groningen_data/*"
+
   Dir[path].each do |file_path|
     uid = file_path.match(/6.*\./)[0]
     household = Household.find_or_create_by!(uid: uid)

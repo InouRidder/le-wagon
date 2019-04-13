@@ -2,13 +2,16 @@ class GreenEnergyProcessor
 
   attr_reader :total_returned_energy
 
+  # GreenEnergyProcessor.new(Household.find(1)).by_datetimes(begin_datetime, end_datetime)
+
   def initialize(household)
     @household = attributes[:household]
     @is_pushed = false
   end
 
   def by_datetimes(begin_datetime, end_datetime)
-    @day_radiation_value = RadiationAPIService.irradiance_between_datetimes(begin_datetime, end_datetime)
+    # Based on a date range we calculate the amount of NGVO and GVO's
+    @day_irradiation_value = RadiationAPIService.irradiance_between_datetimes(begin_datetime, end_datetime)
     @dataset = @household.energy_data.uncertified.where(datetime: begin_datetime..end_datetime)
     @total_returned_energy = @dataset.pluck(:returned_energy).sum
     to_chain
@@ -23,7 +26,7 @@ class GreenEnergyProcessor
   end
 
   def ideal_return_energy
-    @ideal_val ||= @household.peak_returned_energy * @day_radiation_value / @household.peak_radiation
+    @ideal_val ||= @household.peak_returned_energy * @day_irradiation_value / @household.peak_radiation
   end
 
   def to_chain
