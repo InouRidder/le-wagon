@@ -1,9 +1,6 @@
 require 'csv'
 require 'pry'
 
-
-task :test
-
 task :import_energy_data => :environment do
   path = "#{Rails.root}/db/data/groningen_data/*"
   Dir[path].each do |file_path|
@@ -27,21 +24,23 @@ task :import_energy_data => :environment do
         household.energy_data.where(returned_energy: key).destroy_all
       end
     end
-    household.create_peak_curve
+    household.set_peak_curve
+    puts "Added #{household.address}"
   end
 end
 
 
-task :count_houses => :environment do
-  path = "#{Rails.root}/db/data/groningen_data/*"
-  count = 0
-  Dir[path].each do |file_path|
-
-    options = { headers: :first_row, header_converters: :symbol }
-    CSV.foreach(file_path, options) do |row|
-      count += 1 if row[:having_solar] == "True"
-      break
+task :clean_bad_addresses => :environment do
+  Household.all.select do |h|
+    if h.address.include?("..")
+      h.update(address: h.send(:rand_address))
     end
   end
-  puts count
 end
+
+
+
+
+
+
+

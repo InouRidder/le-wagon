@@ -1,7 +1,9 @@
 class OptimalProductionEstimator
-  def initialize(attributes)
-    @household = attributes[:household]
+  def initialize(household)
+    @household = household
+    @highest_energy_datum = @household.highest_energy_datum
     create_peak_curve
+    find_peaks
   end
 
   def create_peak_curve
@@ -11,6 +13,21 @@ class OptimalProductionEstimator
       # Overwrite the value of hash for key (hour/minute) if the given value is higher than the current value
       peak_curve[moment] = datum[:returned_energy] if datum[:returned_energy] > peak_curve[moment]
     end
-    @household.update(peak_production_curve: clean_peak_curve(peak_curve))
+    @household.update(peak_production_curve: peak_curve)
+    set_the_peaks
   end
+
+  def find_peaks
+    peak_radiation
+    peak_returned_energy
+  end
+
+  def peak_radiation
+    @household.update(peak_radiation: RadiationAPIService.by_datetime(@highest_energy_datum.datetime))
+  end
+
+  def peak_returned_energy
+    @household.update(peak_returned_energy: @highest_energy_datum.returned_energy)
+  end
+
 end
