@@ -36,7 +36,7 @@ RSpec.describe GreenEnergyProcessor do
       processor = GreenEnergyProcessor.new(household: household)
       processor.by_datetimes(household.energy_data.first.datetime, household.energy_data.last.datetime)
 
-      expect(processor.ideal_return_energy).to eq(household.peak_returned_energy * processor.instance_variable_get('@day_radiation_value') / household.peak_radiation)
+      expect(processor.ideal_return_energy).to eq(household.peak_returned_energy * processor.instance_variable_get('@day_irradiation_value') / household.peak_radiation)
     end
   end
 

@@ -2,9 +2,9 @@ require 'csv'
 
 
 task :import_energy_data => :environment do
+
   ImportEnergyData.new
 end
-
 
 class ImportEnergyData
   include Rake::DSL
