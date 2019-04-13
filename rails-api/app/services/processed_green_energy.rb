@@ -1,4 +1,5 @@
 class ProcessedGreenEnergy
+
   attr_reader :total_returned_energy
 
   def initialize(attributes)
@@ -7,12 +8,7 @@ class ProcessedGreenEnergy
   end
 
   def consumed_green_energy
-    @consumed ||= 1
-    if @total_returned_energy.zero?
-      ideal_return_energy
-    else
-      ideal_return_energy - @total_returned_energy
-    end
+    @consumed ||= @total_returned_energy.zero? ? ideal_return_energy : ideal_return_energy - @total_returned_energy
   end
 
   def ideal_return_energy

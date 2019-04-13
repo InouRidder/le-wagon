@@ -7,6 +7,7 @@ class OptimalProductionEstimator
   end
 
   def create_peak_curve
+    # this we can use for verification of true energy data - comparing curves
     peak_curve = Hash.new(0)
     @household.energy_data.each do |datum|
       moment = datum.datetime.strftime('%H:%M') # example: "00:15"
