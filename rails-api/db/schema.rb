@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_110239) do
+ActiveRecord::Schema.define(version: 2019_04_13_130344) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -42,6 +42,8 @@ ActiveRecord::Schema.define(version: 2019_04_13_110239) do
     t.string "address"
     t.float "latitude"
     t.float "longitude"
+    t.integer "peak_radiation"
+    t.integer "peak_returned_energy"
   end
 
   create_table "jwt_blacklists", force: :cascade do |t|
