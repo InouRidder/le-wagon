@@ -23,7 +23,7 @@ class OptimalProductionEstimator
   end
 
   def peak_radiation
-    @household.update(peak_radiation: RadiationAPIService.by_datetime(@highest_energy_datum.datetime))
+    @household.update(peak_radiation: RadiationAPIService.weather_by_datetime(@highest_energy_datum.datetime))
   end
 
   def peak_returned_energy
