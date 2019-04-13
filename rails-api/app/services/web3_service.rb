@@ -1,7 +1,7 @@
 class Web3Service
   def initialize
-    contract_address = "0xBA21822d572a2572DdF75555442615bD41AA54FE"
-    dummy_private_key = "b393cbaed558525b81db7492aa7aaae2ca86377aa33b85937f55829b7317a98a"
+    contract_address = "0x13B8C1CbF63aFC4b0b2759872B9e50AeA19E8885"
+    dummy_private_key = "0e1f90152d2eccd5b087f5c83513f6d09a44a5d845e57c3555b6822fd51ec6f9"
 
     client = Ethereum::HttpClient.new('http://localhost:8545')
 

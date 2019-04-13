@@ -58,7 +58,7 @@ class ImportEnergyData
         })
       end
     end
-    clean_house_data(house_data_count, household)
+    # clean_house_data(house_data_count, household)
     household
   end
 end
