@@ -8,7 +8,7 @@ class GreenEnergyProcessor
   end
 
   def by_datetimes(begin_datetime, end_datetime)
-    @day_radiation_value = RadiationAPIService.weather_between_datetimes(begin_datetime, end_datetime)
+    @day_radiation_value = RadiationAPIService.irradiance_between_datetimes(begin_datetime, end_datetime)
     @dataset = @household.energy_data.uncertified.where(datetime: begin_datetime..end_datetime)
     @total_returned_energy = @dataset.pluck(:returned_energy).sum
     to_chain
