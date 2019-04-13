@@ -12,11 +12,7 @@ class Household < ApplicationRecord
   end
 
   def set_optimal_production
-    OptimalProductionEstimator.create_peak_curve(self)
-  end
-
-  def returned_energy_per_day(day)
-    energy_data.where { |datum| datum.datetime.yday == day }
+    OptimalProductionEstimator.new(self)
   end
 
   def highest_energy_datum

@@ -15,7 +15,6 @@ class OptimalProductionEstimator
       peak_curve[moment] = datum[:returned_energy] if datum[:returned_energy] > peak_curve[moment]
     end
     @household.update(peak_production_curve: peak_curve)
-    set_the_peaks
   end
 
   def find_peaks

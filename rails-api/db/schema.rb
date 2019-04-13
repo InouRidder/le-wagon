@@ -44,6 +44,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_130344) do
     t.float "longitude"
     t.integer "peak_radiation"
     t.integer "peak_returned_energy"
+    t.boolean "certified", default: false
   end
 
   create_table "jwt_blacklists", force: :cascade do |t|

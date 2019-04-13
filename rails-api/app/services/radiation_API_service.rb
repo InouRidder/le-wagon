@@ -1,14 +1,13 @@
 class RadiationAPIService
   class << self
-    def self.weather_between_datetimes(begin_datetime, end_datetime, household)
+    def weather_between_datetimes(begin_datetime, end_datetime, household)
       # url = "https://developer.nrel.gov/api/solar/solar_resource/v1.format?api_key=kUJgs2bV92fhQLV1eMGw89wTzfyFMLPpZv0DBxAg&lat=#{@household.latitude}&lng=#{@household.longitude}";
       # response = HTTParty.get(url)
-      # p response
-      return 404
+      [404, 400, 2, 3, 323, 345, 123, 120].sample
     end
 
-    def self.weather_by_datetime(datetime)
-      return 340
+    def weather_by_datetime(datetime)
+      [404, 400, 2, 3, 233, 345, 123, 120].sample
     end
   end
 end

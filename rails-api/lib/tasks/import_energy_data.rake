@@ -11,6 +11,8 @@ task :import_energy_data => :environment do
     CSV.foreach(file_path, options) do |row|
       returned_energy = row[:b_consumption]&.to_f
       house_data_count[returned_energy] += 1
+      # Not saving if there is no returned energy
+      # If the specific returned value has been counted over 20 times (a bias value) don't save it.
       if returned_energy.try(:>, 0.0) && house_data_count[returned_energy] < 20
         ed = EnergyDatum.create({
           returned_energy: returned_energy,
@@ -19,28 +21,14 @@ task :import_energy_data => :environment do
         })
       end
     end
+    # Remove bad values (still 20 saved if present)
     house_data_count.each do |key, value|
       if value >= 20
         household.energy_data.where(returned_energy: key).destroy_all
       end
     end
-    household.set_peak_curve
+    household.set_optimal_production
     puts "Added #{household.address}"
   end
 end
-
-
-task :clean_bad_addresses => :environment do
-  Household.all.select do |h|
-    if h.address.include?("..")
-      h.update(address: h.send(:rand_address))
-    end
-  end
-end
-
-
-
-
-
-
 
