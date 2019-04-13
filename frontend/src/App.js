@@ -5,10 +5,11 @@ import Certificate from '../src/components/certificate';
 import Home from '../src/components/home';
 
 class App extends Component {
+
   render() {
     return (
       <Router>
-        <div>
+        <div className="container">
           <ul>
             <li>
               <Link to="/">Home</Link>
