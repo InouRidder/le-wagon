@@ -30,11 +30,11 @@ class Certificate extends Component {
 
     const contractInstance = await web3.instance.eth.Contract(jsonInterface, address, options)
 
-    this.setState({contract: contractInstance, web3: web3.instance})
+    this.setState({ contract: contractInstance, web3: web3.instance })
   }
 
   handleMeterChange(event) {
-    this.setState({smartmeterID: event.target.value});
+    this.setState({ smartmeterID: event.target.value });
   }
 
   async handleSubmit(event) {
@@ -46,7 +46,6 @@ class Certificate extends Component {
 
     var i
     for (i = 0; i < certificates[0].length; i++) {
-      console.log(i)
       certificateList.push({
         amount: certificates[0][i],
         timestamp: certificates[1][i],
@@ -90,6 +89,7 @@ class Certificate extends Component {
           { this.state.contract ? form : null }
 
           <br />
+
           <ul>
             { certificates }
           </ul>
