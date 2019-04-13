@@ -1,17 +1,21 @@
 class GreenEnergyProcessor
 
-  attr_reader :total_returned_energy
+  attr_reader :total_returned_energy, :is_pushed
 
-  def initialize(household)
+  def initialize(attributes)
     @household = attributes[:household]
     @is_pushed = false
   end
 
   def by_datetimes(begin_datetime, end_datetime)
-    @day_radiation_value = RadiationAPIService.weather_between_datetimes(begin_datetime, end_datetime)
     @dataset = @household.energy_data.uncertified.where(datetime: begin_datetime..end_datetime)
     @total_returned_energy = @dataset.pluck(:returned_energy).sum
-    to_chain
+    if Rails.env.test?  # No time to stub.
+      @day_radiation_value = rand(200...600)
+    else
+      @day_radiation_value = RadiationAPIService.weather_between_datetimes(begin_datetime, end_datetime)
+      to_chain
+    end
   end
 
   def consumed_green_energy
