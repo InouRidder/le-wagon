@@ -25,7 +25,7 @@ class Certificate extends Component {
     const web3 = await getWeb3
 
     const jsonInterface = certificatesArtifact.abi
-    const address = "0x539bc5Ef3907DC37eFE798926A7D52d75C8FA512"
+    const address = "0xe7736e96541aA5ee2acf011683e4B8e97086EB32"
     const options = {}
 
     const contractInstance = await web3.instance.eth.Contract(jsonInterface, address, options)
