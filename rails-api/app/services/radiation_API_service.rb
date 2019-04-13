@@ -17,7 +17,7 @@ class RadiationAPIService
   class << self
     def irradiance_between_datetimes(begin_datetime, end_datetime)
       # Return peak (or set of irradiance values) irradiance values based on beginning and end date
-      # url = "https://developer.nrel.gov/api/solar/solar_resource/v1.format?api_key=kUJgs2bV92fhQLV1eMGw89wTzfyFMLPpZv0DBxAg&lat=#{@household.latitude}&lng=#{@household.longitude}";
+      # url = "https://developer.nrel.gov/api/solar/seaf78olar_resource/v1.format?api_key=kUJgs2bV92fhQLV1eMGw89wTzfyFMLPpZv0DBxAg&lat=#{@household.latitude}&lng=#{@household.longitude}";
       # response = HTTParty.get(url)
       @@irradiance_peaks_per_month[begin_datetime.strftime("%B").downcase]
     end

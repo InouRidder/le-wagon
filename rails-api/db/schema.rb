@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2019_04_13_130344) do
+ActiveRecord::Schema.define(version: 2019_04_13_185351) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -22,6 +22,7 @@ ActiveRecord::Schema.define(version: 2019_04_13_130344) do
     t.bigint "household_id"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.boolean "certified", default: false
     t.index ["household_id"], name: "index_energy_data_on_household_id"
   end
 
