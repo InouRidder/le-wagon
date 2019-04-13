@@ -2,6 +2,8 @@ class Household < ApplicationRecord
 
   validates :uid, uniqueness: true, presence: true
   has_many :energy_data
+  geocoded_by :address
+  after_validation :geocode
 
   def self.find_or_create(attributes)
     Household.find_by(uid: attributes[:uid]) || Household.create(uid: attributes[:uid])

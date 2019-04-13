@@ -83,6 +83,7 @@ GEM
     ffi-compiler (1.0.1)
       ffi (>= 1.0.0)
       rake
+    geocoder (1.5.1)
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     histogram (0.2.4.1)
@@ -200,8 +201,9 @@ DEPENDENCIES
   dotenv
   eth
   ethereum.rb
-  histogram
+  geocoder
   httparty
+master
   jbuilder (~> 2.5)
   listen (>= 3.0.5, < 3.2)
   pg (>= 0.18, < 2.0)
