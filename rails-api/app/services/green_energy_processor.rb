@@ -21,7 +21,6 @@ class GreenEnergyProcessor
     end
   end
 
-  private
 
   def consumed_green_energy
     @consumed ||= if @total_returned_energy.zero?
@@ -35,6 +34,7 @@ class GreenEnergyProcessor
     @ideal_val ||= @household.peak_returned_energy * @day_irradiation_value / @household.peak_radiation
   end
 
+  private
   def ideal_return_energy_per_day
     # Compute ideal_val for each hour that there is solar irradation
     #
@@ -55,8 +55,8 @@ class GreenEnergyProcessor
     return if @is_pushed
     byebug
     @block_chain = Web3Service.new
-    push_to_chain(consumed_green_energy, 'NTGO')
-    push_to_chain(@total_returned_energy, 'TGO')
+    push_to_chain(consumed_green_energy, 1) #NGTO
+    push_to_chain(@total_returned_energy, 0) #TGO
     @dataset.update_all(certified: true)
   end
 
