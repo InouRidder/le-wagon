@@ -17,6 +17,7 @@ gem 'devise'
 gem 'devise-jwt'
 gem 'dotenv'
 gem 'histogram'
+gem 'geocoder'
 
 # Use ActiveStorage variant
 # gem 'mini_magick', '~> 4.8'
