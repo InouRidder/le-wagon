@@ -12,43 +12,47 @@ class Certificate extends Component {
 
     this.state = {
       smartmeterID: 1,
-      certificates: []
+      certificates: [],
+      contract: null,
+      web3: null
     }
+
+    this.handleMeterChange = this.handleMeterChange.bind(this)
+    this.handleSubmit = this.handleSubmit.bind(this)
   }
 
   async componentDidMount() {
     const web3 = await getWeb3
 
     const jsonInterface = certificatesArtifact.abi
-    const address = "0x539bc5Ef3907DC37eFE798926A7D52d75C8FA512"
+    const address = "0xBA21822d572a2572DdF75555442615bD41AA54FE"
     const options = {}
-
-    console.log(web3.instance)
 
     const contractInstance = await web3.instance.eth.Contract(jsonInterface, address, options)
 
-    console.log(contractInstance)
+    this.setState({ contract: contractInstance, web3: web3.instance })
+  }
 
-    const certificates = await contractInstance.methods.certificates(this.state.smartmeterID).call()
+  handleMeterChange(event) {
+    this.setState({ smartmeterID: event.target.value });
+  }
 
-    console.log(certificates)
+  async handleSubmit(event) {
+    const certificates = await this.state.contract.methods.certificates(this.state.smartmeterID).call()
 
-    const accounts = await web3.instance.eth.getAccounts()
-
-    // console.log(accounts)
-    // await contractInstance.methods.pushCertificate(2, 100, 12345, 0).send({ from: accounts[0] })
+    const accounts = await this.state.web3.eth.getAccounts()
 
     var certificateList = []
 
     var i
-
-    for (i = 0; i < certificates[0].length; i++) {
-      console.log(i)
-      certificateList.push({
-        amount: certificates[0][i],
-        timestamp: certificates[1][i],
-        certificateType: certificates[2][i]
-      })
+    if (certificates) {
+      for (i = 0; i < certificates[0].length; i++) {
+        certificateList.push({
+          amount: certificates[0][i],
+          timestamp: certificates[1][i],
+          certificateType: certificates[2][i]
+        })
+      }
     }
 
     this.setState({certificates: certificateList})
@@ -59,22 +63,49 @@ class Certificate extends Component {
 
     const certificates = this.state.certificates.map((certificate) => {
       return (
-        <li key={ Math.random().toString(36).replace(/[^a-z]+/g, '')  }>
-          <strong>amount:</strong> { Number(certificate.amount) } <strong>type:</strong> { CERTTYPES[certificate.certificateType] } <strong>timestamp:</strong> { Number(certificate.timestamp) }
-        </li>
+        <tr key={ Math.random().toString(36).replace(/[^a-z]+/g, '')  }>
+          <td>{ Number(certificate.amount) }</td>
+          <td>{ CERTTYPES[certificate.certificateType] }</td>
+          <td>{ Number(certificate.timestamp) }</td>
+        </tr>
       )
     })
+
+    const form = (
+      <div className="field has-addons">
+        <div className="control">
+          <input className="input" type="text" placeholder="Find a repository" value={this.state.smartmeterID} onChange={this.handleMeterChange} />
+        </div>
+        <div className="control">
+          <a className="button is-info" onClick={this.handleSubmit}>
+            Get certificates
+          </a>
+        </div>
+      </div>
+    )
 
     return (
       <Router>
         <div>
-          <p>Dit is de certificate page</p>
+          <p>Certificates</p>
 
           <hr />
+          { this.state.contract ? form : null }
 
-          <ul>
-            { certificates }
-          </ul>
+          <br />
+
+          <table class="table is-fullwidth">
+            <thead>
+              <tr>
+                <th>Amount</th>
+                <th>Type</th>
+                <th>Timestamp</th>
+              </tr>
+            </thead>
+            <tbody>
+              { certificates }
+            </tbody>
+          </table>
         </div>
       </Router>
     );
