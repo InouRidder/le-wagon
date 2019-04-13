@@ -4,8 +4,18 @@ import 'bulma/css/bulma.css'
 import getWeb3 from '../utils/getWeb3'
 var certificatesArtifact = require('../contracts/Certificates.json');
 
+const CERTTYPES = ["Tradable", "Non tradable"]
 
 class Certificate extends Component {
+  constructor(props) {
+    super(props)
+
+    this.state = {
+      smartmeterID: 1,
+      certificates: []
+    }
+  }
+
   async componentDidMount() {
     const web3 = await getWeb3
 
@@ -19,7 +29,7 @@ class Certificate extends Component {
 
     console.log(contractInstance)
 
-    const certificates = await contractInstance.methods.certificates(1).call()
+    const certificates = await contractInstance.methods.certificates(this.state.smartmeterID).call()
 
     console.log(certificates)
 
@@ -27,10 +37,34 @@ class Certificate extends Component {
 
     // console.log(accounts)
     // await contractInstance.methods.pushCertificate(2, 100, 12345, 0).send({ from: accounts[0] })
+
+    var certificateList = []
+
+    var i
+
+    for (i = 0; i < certificates[0].length; i++) {
+      console.log(i)
+      certificateList.push({
+        amount: certificates[0][i],
+        timestamp: certificates[1][i],
+        certificateType: certificates[2][i]
+      })
+    }
+
+    this.setState({certificates: certificateList})
   }
 
 
   render() {
+
+    const certificates = this.state.certificates.map((certificate) => {
+      return (
+        <li key={ Math.random().toString(36).replace(/[^a-z]+/g, '')  }>
+          <strong>amount:</strong> { Number(certificate.amount) } <strong>type:</strong> { CERTTYPES[certificate.certificateType] } <strong>timestamp:</strong> { Number(certificate.timestamp) }
+        </li>
+      )
+    })
+
     return (
       <Router>
         <div>
@@ -38,6 +72,9 @@ class Certificate extends Component {
 
           <hr />
 
+          <ul>
+            { certificates }
+          </ul>
         </div>
       </Router>
     );
