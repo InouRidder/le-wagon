@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
 import { BrowserRouter as Router} from "react-router-dom";
 import 'bulma/css/bulma.css'
-import getWeb3 from '../../utils/getWeb3'
-var certificatesArtifact = require('../../contracts/Certificates.json');
+import getWeb3 from '../../../utils/getWeb3'
+import { decorate } from './styles';
+var certificatesArtifact = require('../../../contracts/Certificates.json');
+
 
 const CERTTYPES = ["Tradable", "Non tradable"]
 
@@ -84,15 +86,15 @@ class Certificate extends Component {
 
     return (
       <Router>
-        <div>
-          <p>Certificates</p>
+        <div className="container">
+          <p className="title">Certificates</p>
 
           <hr />
           { this.state.contract ? form : null }
 
           <br />
 
-          <table class="table is-fullwidth">
+          <table className="table is-fullwidth">
             <thead>
               <tr>
                 <th>Amount</th>
@@ -110,4 +112,4 @@ class Certificate extends Component {
   }
 }
 
-export default Certificate;
+export default decorate(Certificate);
