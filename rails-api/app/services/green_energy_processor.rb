@@ -63,7 +63,7 @@ class GreenEnergyProcessor
 
   def push_to_chain(value, type_of_cert)
     if value > 0
-      @block_chain.push_certificate(@household.uid, value, Time.now, type_of_cert)
+      @block_chain.push_certificate(@household.uid, value, Time.now.to_i, type_of_cert)
     end
   end
 end
