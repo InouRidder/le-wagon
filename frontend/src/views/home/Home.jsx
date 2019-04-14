@@ -20,9 +20,13 @@ class Home extends React.PureComponent {
         <div className="container">
           <div className="row">
             <div className="col">
+              <h2>Tradable (actual) and non-tradable(predicted) certified energy over time</h2>
+              <br />
               <GraphLine />
             </div>
             <div className="col">
+              <h2>Accumulated tradable (actual) and non-tradable(predicted) certified energy</h2>
+              <br />
               <BarCharting />
             </div>
           </div>
