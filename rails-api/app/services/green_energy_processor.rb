@@ -53,7 +53,6 @@ class GreenEnergyProcessor
 
   def to_chain
     return if @is_pushed
-    byebug
     @block_chain = Web3Service.new
     push_to_chain(consumed_green_energy, 1) #NGTO
     push_to_chain(@total_returned_energy, 0) #TGO
