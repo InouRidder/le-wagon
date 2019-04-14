@@ -2,8 +2,10 @@ class OptimalProductionEstimator
   def initialize(household)
     @household = household
     @highest_energy_datum = @household.highest_energy_datum
-    create_peak_curve
-    find_peaks
+    if @household.energy_data.any?
+      create_peak_curve
+      find_peaks
+    end
   end
 
   def create_peak_curve
@@ -23,7 +25,7 @@ class OptimalProductionEstimator
   end
 
   def peak_radiation
-    @household.update(peak_radiation: RadiationAPIService.weather_by_datetime(@highest_energy_datum.datetime))
+    @household.update(peak_radiation: RadiationAPIService.irradiance_by_datetime(@highest_energy_datum.datetime))
   end
 
   def peak_returned_energy

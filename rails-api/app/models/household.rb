@@ -16,6 +16,7 @@ class Household < ApplicationRecord
   end
 
   def highest_energy_datum
+    # Return highest possible returned energy for this household.
     all_data = self.energy_data
     all_data.find_by(returned_energy: all_data.pluck(:returned_energy).max)
   end
