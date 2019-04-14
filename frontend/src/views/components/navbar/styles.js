@@ -11,12 +11,6 @@ const styles = (theme) => ({
   logo: {
     height: '50px',
   },
-  logoLink: {
-    // paddingTop: theme.spacing.unit * 3,
-    // paddingBottom: theme.spacing.unit * 3,
-    // paddingLeft: theme.spacing.unit,
-    // paddingRight: theme.spacing.unit * 2,
-  },
   container: {
       margin: 0
   },
@@ -25,9 +19,14 @@ const styles = (theme) => ({
       verticalAlign: 'middle',
       padding: 0,
   },
+  welcome: {
+    color: '#002c76',
+    marginTop: '10px'
+  },
   flex: {
     flex: 1,
   },
+
   menuButton: {
     color: '#002c76',
     display: 'inline-block',

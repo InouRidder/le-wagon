@@ -1,11 +1,10 @@
 import React from 'react'
-import ReactDOM from 'react-dom'
-import InputLabel from '@material-ui/core/InputLabel'
+import FormHelperText from '@material-ui/core/FormHelperText'
 import MenuItem from '@material-ui/core/MenuItem'
 import FormControl from '@material-ui/core/FormControl'
 import Select from '@material-ui/core/Select'
 import Paper from '@material-ui/core/Paper'
-// import Grid from '@material-ui/core/Grid'
+import Button from '@material-ui/core/Button'
 import {decorate} from './styles'
 
 class Selector extends React.Component {
@@ -17,7 +16,7 @@ class Selector extends React.Component {
 
   componentDidMount() {
     this.setState({
-      //labelWidth: ReactDOM.findDOMNode(this.InputLabelRef).offsetWidth,
+      labelWidth: '2px',
     });
   }
 
@@ -32,7 +31,6 @@ class Selector extends React.Component {
       <Paper elevation={1} className={classes.paper}>
         <form className={classes.root} autoComplete="off">
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="country">Land</InputLabel>
             <Select
               value={this.state.country}
               onChange={this.handleChange}
@@ -47,9 +45,9 @@ class Selector extends React.Component {
                 </MenuItem>
               )}
             </Select>
+            <FormHelperText>Land</FormHelperText>
           </FormControl>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="city">Stad</InputLabel>
             <Select
               value={this.state.city}
               onChange={this.handleChange}
@@ -62,9 +60,9 @@ class Selector extends React.Component {
                 <MenuItem value={city}>{city}</MenuItem>
               )}
             </Select>
+            <FormHelperText>Stad</FormHelperText>
           </FormControl>
           <FormControl className={classes.formControl}>
-            <InputLabel htmlFor="neighbourhood">Buurt</InputLabel>
             <Select
               value={this.state.neighbourhood}
               onChange={this.handleChange}
@@ -79,10 +77,15 @@ class Selector extends React.Component {
                 </MenuItem>
               )}
             </Select>
+            <FormHelperText>Buurt</FormHelperText>
           </FormControl>
+          <Button variant="contained" onCLick={this.submit} className={classes.button}>Submit</Button>
         </form>
       </Paper>
     )
+  }
+  submit = () => {
+
   }
 }
 

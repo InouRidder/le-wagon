@@ -17,6 +17,12 @@ const styles = theme => ({
   selectEmpty: {
     marginTop: theme.spacing.unit * 2,
   },
+  button: {
+    color: '#00aeef',
+    '&:hover': {
+      color: '#002c76'
+    } 
+  }
 })
 
 export const decorate = withStyles(styles)
