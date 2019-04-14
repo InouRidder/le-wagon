@@ -1,8 +1,10 @@
 import React, { Component } from 'react';
-import { BrowserRouter as Router, Route, Link } from "react-router-dom";
+import { BrowserRouter as Router} from "react-router-dom";
 import 'bulma/css/bulma.css'
-import getWeb3 from '../utils/getWeb3'
-var certificatesArtifact = require('../contracts/Certificates.json');
+import getWeb3 from '../../../utils/getWeb3'
+import { decorate } from './styles';
+var certificatesArtifact = require('../../../contracts/Certificates.json');
+
 
 const CERTTYPES = ["Tradable", "Non tradable"]
 
@@ -40,8 +42,6 @@ class Certificate extends Component {
   async handleSubmit(event) {
     const certificates = await this.state.contract.methods.certificates(this.state.smartmeterID).call()
 
-    const accounts = await this.state.web3.eth.getAccounts()
-
     var certificateList = []
 
     var i
@@ -77,24 +77,24 @@ class Certificate extends Component {
           <input className="input" type="text" placeholder="Find a repository" value={this.state.smartmeterID} onChange={this.handleMeterChange} />
         </div>
         <div className="control">
-          <a className="button is-info" onClick={this.handleSubmit}>
+          <button className="button is-info" onClick={this.handleSubmit}>
             Get certificates
-          </a>
+          </button>
         </div>
       </div>
     )
 
     return (
       <Router>
-        <div>
-          <p>Certificates</p>
+        <div className="container">
+          <p className="title">Certificates</p>
 
           <hr />
           { this.state.contract ? form : null }
 
           <br />
 
-          <table class="table is-fullwidth">
+          <table className="table is-fullwidth">
             <thead>
               <tr>
                 <th>Amount</th>
@@ -112,4 +112,4 @@ class Certificate extends Component {
   }
 }
 
-export default Certificate;
+export default decorate(Certificate);
