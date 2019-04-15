@@ -27,6 +27,10 @@ const styles = (theme) => ({
     flex: 1,
   },
 
+  title: {
+    marginTop: 100,
+  },
+
   menuButton: {
     color: '#002c76',
     display: 'inline-block',
